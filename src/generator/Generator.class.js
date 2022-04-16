@@ -1,21 +1,24 @@
-import {get_random_int} from './generator.service'
-import {template_new_obj_default} from "./generator.defaults";
+import {get_random_int} from '../general.service'
+import {get_object_by_template_by_id} from "./generator.service";
 
 class Generator {
     #queue;
+    #template_id;
+    constructor(queue, template_id) {
 
-    constructor(queue, template_object) {
+        // queue object
         this.#queue = queue;
-        this.template_object =
-            template_object?.constructor === Function ?
-            template_object :
-                template_new_obj_default;
+
+        // get new object by template
+        this.#template_id =template_id;
+
+        // trigger for generating
         this.is_enabled_generator = false;
     }
 
     create_new_object() {
         let new_random_value = get_random_int(0, 100);
-        let new_object = this.template_object(new_random_value);
+        let new_object = get_object_by_template_by_id(this.#template_id, new_random_value);
         return new_object;
     }
 

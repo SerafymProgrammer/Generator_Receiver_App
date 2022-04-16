@@ -24,7 +24,7 @@ class Queue {
         return item;
     }
 
-    peek() {
+    get_peek_element() {
         return this.#elements[this.#head];
     }
     get length() {
