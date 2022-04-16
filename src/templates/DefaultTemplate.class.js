@@ -8,6 +8,15 @@ class DefaultTemplate {
         this.data = data;
     }
 
+    static isValid (obj) {
+        if (!obj) {
+            return false;
+        }
+        if (isNaN(obj.data)) {
+            return false;
+        }
+    }
+
     get data() {
         return this.data;
     }

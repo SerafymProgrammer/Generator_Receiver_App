@@ -14,7 +14,7 @@ class Queue {
         this.#tail++;
     }
 
-    delete_from_queue() {
+    extract_from_queue() {
         if (this.#tail===this.#head) {
             return
         }

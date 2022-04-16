@@ -1,10 +1,14 @@
+import {validate_object_by_template_by_id} from "./receiver.service";
 
 class Receiver {
 
     #queue;
+    #template_id;
+    #delay;
+    constructor(queue, template_id) {
 
-    constructor(queue) {
         this.#queue = queue;
+        this.#template_id = template_id;
 
         // counters
         this.counters  = {
@@ -18,14 +22,7 @@ class Receiver {
     }
 
     select_counter_id_by_received_object (received_object) {
-        if (!received_object) {
-            console.log('received not object')
-            return null;
-        }
-        if (isNaN(received_object.data)) {
-            console.log('received data is not number')
-            return null;
-        }
+
 
         let condition_data = received_object.data;
         switch (condition_data) {
@@ -43,14 +40,19 @@ class Receiver {
             }
         }
     }
-
+    receive() {
+        let extracted_object = this.#queue.extract_from_queue();
+        if (!validate_object_by_template_by_id(this.#template_id,received_object)){
+            return false
+        }
+    }
     start_receiver() {
-        this.is_enabled_generator = true;
-        this.generate()
+        this.is_enabled_receiving = true;
+        this.receive()
     }
 
     stop_receiver() {
-        this.is_enabled_generator = false;
+        this.is_enabled_receiving = false;
     }
 }
 
