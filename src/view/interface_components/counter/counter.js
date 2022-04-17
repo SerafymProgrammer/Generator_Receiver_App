@@ -1,4 +1,4 @@
-import {check_existed_id, check_is_dom_node, create_unique_id} from "../../app.service";
+import {check_existed_id, check_is_dom_node, create_unique_id} from "../../../app.service";
 
 function CounterComponent(props={}) {
     let mounted = false;

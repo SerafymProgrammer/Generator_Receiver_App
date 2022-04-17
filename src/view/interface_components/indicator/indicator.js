@@ -1,9 +1,9 @@
-import {check_existed_id, check_is_dom_node, create_unique_id} from "../../app.service";
-import CounterComponent from "./counter";
+import {check_existed_id, check_is_dom_node, create_unique_id} from "../../../app.service";
+
 
 function IndicatorComponent(props) {
 
-    const colors_indicator = {
+    const classes_state_indicator = {
         true: '#6ecc21',
         false: '#cc2121'
     }
@@ -18,7 +18,7 @@ function IndicatorComponent(props) {
     let indicator_component = document.createElement('div')
     indicator_component.id = unique_id;
     indicator_component.className = classes?.wrap ? classes.wrap : '';
-    indicator_component.style.background = colors_indicator[indicator_status];
+    indicator_component.classList classes_state_indicator[indicator_status];
 
     return {
 
@@ -38,6 +38,10 @@ function IndicatorComponent(props) {
         },
 
         render: function (where_to_mount) {
+            if (mounted) {
+                throw new Error(`component with id:${id} already mounted`);
+                return
+            }
             if (!check_is_dom_node(where_to_mount)) {
                 throw new Error('parent to mount is not dom element');
                 return false
