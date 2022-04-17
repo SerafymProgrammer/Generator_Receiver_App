@@ -15,6 +15,7 @@ class DefaultTemplate {
         if (isNaN(obj.data)) {
             return false;
         }
+        return true
     }
 
     get data() {
