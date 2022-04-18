@@ -1,13 +1,42 @@
 
+body {
+    font-family: cursive;
+}
+
 .generator_receiver_container {
-    width: 600px;
     display: flex;
 
-    border: 1px solid #e04516;
+    border: 1px solid #7116e0;
 
-    margin-left: 20px;
-    margin-top: 20px;
+    box-sizing: border-box;
+
+    padding: 50px;
+    margin: 25px;
+
+    background: rgba(171, 218, 224, 0.85);
 }
+
+.generator_block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid #1699e0;
+    margin: 10px;
+}
+
+.receiver_block {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 1px solid #1699e0;
+    margin: 10px;
+
+}
+
 .indicator_generator {
     width: 50px;
     height: 50px;

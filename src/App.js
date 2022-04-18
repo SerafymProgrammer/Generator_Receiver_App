@@ -1,4 +1,4 @@
-import GeneratorReceiverView from "./view/GeneratorReceiverComponent.view.js";
+import GeneratorReceiverView from "./view/generator_receiving/GeneratorReceiver.component.js";
 
 class App {
 
@@ -13,22 +13,18 @@ class App {
     }
 
     mount() {
-        let root_app = document.getElementById('root');
-        if (root_app) {
-           return
-        }
-        let root_element = document.createElement('div')
-        root_element.id = 'root';
-        document.body.appendChild(root_element);
-        this.#mounted_app = true;
+
     }
 
     render() {
         // console.log('Hey')
-        this.mount()
+        let root_app = document.getElementById('root');
+
 
         let generator_receiver_component = new GeneratorReceiverView('generator_receiver_1')
-        generator_receiver_component.render();
+        generator_receiver_component.render(root_app);
+
+        this.#mounted_app = true;
     }
 }
 

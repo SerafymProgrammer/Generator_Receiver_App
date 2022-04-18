@@ -23,7 +23,6 @@ function CustomBtn(props={}) {
 
     if (on_click){
         btn_component.addEventListener('click', (e)=>{
-            debugger
             e.preventDefault();
             this_on_click()
         })

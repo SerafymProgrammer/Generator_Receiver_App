@@ -7,6 +7,7 @@ class Receiver {
     #template_id;
     #counters;
     #delay;
+    #is_enabled_receiving
     constructor(queue, template_id, on_change_state_handler) {
 
         this.#queue = queue;
@@ -22,10 +23,14 @@ class Receiver {
         }
 
         // trigger for receiving
-        this.is_enabled_receiving = false;
+        this.#is_enabled_receiving = false;
 
         // delay
         this.#delay = 0;
+    }
+
+    get_is_enabled_receiver () {
+        return this.#is_enabled_receiving;
     }
 
     set on_change_state_handler(function_) {
@@ -72,6 +77,9 @@ class Receiver {
         }
     }
     receive() {
+        if (!this.#is_enabled_receiving) {
+            return
+        }
         let receiving_status = false;
         let extracted_object = this.#queue.extract_from_queue();
 
@@ -93,12 +101,12 @@ class Receiver {
 
 
     start_receiver() {
-        this.is_enabled_receiving = true;
+        this.#is_enabled_receiving = true;
         this.receive()
     }
 
     stop_receiver() {
-        this.is_enabled_receiving = false;
+        this.#is_enabled_receiving = false;
     }
 }
 
