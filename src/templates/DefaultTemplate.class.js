@@ -1,5 +1,4 @@
-import {get_random_int} from './generator.service'
-import {template_new_obj_default} from "./generator.defaults";
+import {get_random_int} from '../app.service.js'
 
 class DefaultTemplate {
 
@@ -19,7 +18,7 @@ class DefaultTemplate {
     }
 
     get data() {
-        return this.data;
+        return this._data;
     }
 
     set data(value) {
@@ -27,7 +26,7 @@ class DefaultTemplate {
         if (isNaN(value)) {
             new_value = get_random_int(1,101)
         }
-        this.data = new_value;
+        this._data = new_value;
     }
 }
 

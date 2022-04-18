@@ -1,0 +1,23 @@
+
+.generator_receiver_container {
+    width: 600px;
+    display: flex;
+
+    border: 1px solid #e04516;
+
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.indicator_generator {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #1638e0;
+}
+
+.indicator_generator.enabled {
+        background: #3be016;
+}
+
+.indicator_generator.disabled {
+    background: #e01616;
+}

@@ -12,6 +12,7 @@ class Queue {
     add_to_queue(element) {
         this.#elements[this.#tail] = element;
         this.#tail++;
+        console.log(this.#elements)
     }
 
     extract_from_queue() {

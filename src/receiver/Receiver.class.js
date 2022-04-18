@@ -1,4 +1,5 @@
-import {validate_object_by_template_by_id, validate_is_function} from "./receiver.service";
+import {validate_object_by_template_by_id} from "./receiver.service.js";
+import {validate_is_function} from "../app.service.js";
 
 class Receiver {
 
@@ -22,6 +23,9 @@ class Receiver {
 
         // trigger for receiving
         this.is_enabled_receiving = false;
+
+        // delay
+        this.#delay = 0;
     }
 
     set on_change_state_handler(function_) {
@@ -82,7 +86,9 @@ class Receiver {
 
         this.on_change_state_handler(receiving_status, incremented);
 
-        return
+        this.#delay = receiving_status ? 2  : this.#delay+1;
+
+        setTimeout(()=>receive(), this.#delay*1000)
     }
 
 

@@ -1,5 +1,4 @@
-import GeneratorReceiverView from "./view/GeneratorReceiverStruct.view";
-
+import GeneratorReceiverView from "./view/GeneratorReceiverComponent.view.js";
 
 class App {
 
@@ -25,7 +24,9 @@ class App {
     }
 
     render() {
+        // console.log('Hey')
         this.mount()
+
         let generator_receiver_component = new GeneratorReceiverView('generator_receiver_1')
         generator_receiver_component.render();
     }

@@ -16,6 +16,15 @@ export const check_is_dom_node = (element)=>{
 }
 
 export const create_unique_id = (modifier, custom_id='', )=>{
-    let new_unique_id =`${custom_id}_${modifier}_${Math.random}`;
+    let new_unique_id =`${custom_id}_${modifier}_${Math.random()}`;
     return new_unique_id;
+}
+
+export function validate_is_function (function_, error_msg='function_is_not_defined') {
+    if (!function_||function_.constructor!==Function) {
+        return ()=> {
+            console.log(error_msg)
+        };
+    }
+    return function_;
 }
