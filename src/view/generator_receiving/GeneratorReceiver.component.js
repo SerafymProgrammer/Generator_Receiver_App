@@ -46,11 +46,16 @@ class GeneratorReceiverView {
         let markup = generator_receiver_markup(this.id)
         where_to_mount.innerHTML += markup;
 
-        let Generator = new GeneratorComponent(this.id, this.#queue)
-        let Receiver = new ReceiverComponent(this.id, this.#queue)
         let content_ = where_to_mount.querySelector('.generator_receiver_container');
-        Generator.render(content_);
-        // Receiver.render(content_);
+        let content_generator = content_.querySelector('.generator_block');
+        let content_receiver = content_.querySelector('.receiver_block');
+        let Generator = new GeneratorComponent(this.id, this.#queue)
+        Generator.render(content_generator);
+        let Receiver = new ReceiverComponent(this.id, this.#queue)
+        Receiver.render(content_receiver);
+
+        // Generator.toggle_start_stop_generator()
+        // setTimeout(()=>   Generator.toggle_start_stop_generator(), 12000)
     }
 }
 

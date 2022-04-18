@@ -37,7 +37,7 @@ class Generator {
         let new_obj = this.create_new_object();
         this.add_new_object_to_queue(new_obj);
         let random_delay = get_random_int(1, 11);
-        setTimeout(()=> {this.generate()}, random_delay*1000)
+        setTimeout(()=> {this.generate()}, random_delay*100)
     }
 
     start_generator() {

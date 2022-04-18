@@ -49,6 +49,7 @@ class GeneratorComponent {
         if (!this.#mounted) {
             return
         }
+
         let generator_status = this.#generator.get_is_enabled_generator();
         let new_status_text_for_btn = generator_status ? 'Start' : 'Stop';
         let new_status_indicator = generator_status ? 'disabled' : 'enabled';
@@ -72,17 +73,18 @@ class GeneratorComponent {
     }
 
     create_buttons_components(){
-        this.#en_dis_generator_btn = CustomBtn({
+        this.#en_dis_generator_btn = new CustomBtn({
             id: 'start_stop_generator',
             classes: {
                 custom_btn_class: 'start_stop_btn',
                 custom_btn_text_class: 'start_stop_btn_text',
             },
-            text: this.#generator.get_is_enabled_generator() ?  'Stop' : 'Start',
+            default_text: this.#generator.get_is_enabled_generator() ?  'Stop' : 'Start',
             on_click: ()=>{
                 this.toggle_start_stop_generator()
             }
         })
+        // this.#en_dis_generator_btn.add_event_listener('click',)
     }
 
 

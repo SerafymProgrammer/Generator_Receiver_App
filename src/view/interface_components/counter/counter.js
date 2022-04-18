@@ -22,7 +22,7 @@ function CounterComponent(props={}) {
     return {
         change_text_content: function (new_text) {
             let component = check_existed_id(unique_id);
-            let component_text = component.querySelector(`#${unique_id_of_the_text}`)
+            let component_text = document.getElementById(unique_id_of_the_text)
             if (!component||!component_text){
                 throw new Error(`counter or counter text with id:${id} is not mounted in DOM`);
                 return
