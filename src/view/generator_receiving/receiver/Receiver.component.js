@@ -1,4 +1,4 @@
-import Receiver from "../../../receiver/Receiver.class.js";
+import Receiver from "../../../structures/receiver/Receiver.class.js";
 import CustomBtn from "../../interface_components/start_stop_btn/custom_btn.js";
 import IndicatorComponent from "../../interface_components/indicator/indicator.js";
 import CounterComponent from "../../interface_components/counter/counter.js";
@@ -20,9 +20,8 @@ class ReceiverComponent {
     #is_success_receiving;
 
     // counters:
-    #counter_1;
-    #counter_2;
-    #counter_3;
+    #counters;
+
 
     // buttons:
     #en_dis_receiver_btn;
@@ -33,6 +32,11 @@ class ReceiverComponent {
         this.#mounted = false;
         this.#queue = queue;
         this.#receiver = new Receiver(this.#queue);
+        this.#counters = {
+            1: null,
+            2: null,
+            3: null
+        }
     }
 
     //ошибка
@@ -59,6 +63,7 @@ class ReceiverComponent {
         let new_status_text_for_btn = receiver_status ? 'Start' : 'Stop';
         let new_status_indicator = receiver_status ? 'disabled' : 'enabled';
 
+
         this.#en_dis_receiver_btn.change_text_content(new_status_text_for_btn);
         this.#is_enabled_receiver.change_indicator_status(new_status_indicator);
 
@@ -81,21 +86,8 @@ class ReceiverComponent {
             return
         }
         this.toggle_receiving_indicator(status);
-        if (status) {
-            switch (changed_state.key) {
-                case 1: {
-                    this.#counter_1.change_text_content(changed_state.value);
-                    break;
-                }
-                case 2: {
-                    this.#counter_2.change_text_content(changed_state.value);
-                    break;
-                }
-                case 3: {
-                    this.#counter_3.change_text_content(changed_state.value);
-                    break;
-                }
-            }
+        if (status&&this.#counters.hasOwnProperty(changed_state.key)) {
+            this.#counters[changed_state.key].change_text_content(changed_state.value);
         }
     }
 
@@ -106,6 +98,7 @@ class ReceiverComponent {
             classes: {
                 block_indicator: 'indicator_receiver',
             },
+            default_indicator_status:this.#receiver.get_is_enabled_receiver() ?  'enabled' : 'disabled'
         })
         this.#is_success_receiving = IndicatorComponent({
             id: 'is_success_receiving',
@@ -116,30 +109,15 @@ class ReceiverComponent {
     }
     create_counters_components(){
         let counters_values = this.#receiver.get_counters()
-        this.#counter_1 = CounterComponent({
-            id: 'counter_1',
-            classes: {
-                wrap_counter: 'counter_block',
-                text_counter: 'counter_block_text'
-            },
-            text: counters_values[1]
-        })
-
-        this.#counter_2 = CounterComponent({
-            id: 'counter_2',
-            classes: {
-                wrap_counter: 'counter_block',
-                text_counter: 'counter_block_text'
-            },
-            text: counters_values[2]
-        })
-        this.#counter_3 = CounterComponent({
-            id: 'counter_3',
-            classes: {
-                wrap_counter: 'counter_block',
-                text_counter: 'counter_block_text'
-            },
-            text: counters_values[3]
+        Object.keys(this.#counters).forEach((key_)=>{
+            this.#counters[key_] = CounterComponent({
+                id: `counter_${key_}`,
+                classes: {
+                    wrap_counter: 'counter_block_element',
+                    text_counter: 'counter_block_element_text'
+                },
+                text: counters_values[key_]
+            })
         })
     }
     create_buttons_components(){
@@ -160,12 +138,12 @@ class ReceiverComponent {
                 custom_btn_class: 'reset_counters_btn',
                 custom_btn_text_class: 'reset_counters_btn_text',
             },
-            default_text: 'Reset',
+            default_text: 'Reset counters',
             on_click: ()=>{
                 let reseted_value = this.#receiver.reset_counters();
-                this.#counter_1.change_text_content(reseted_value[1]);
-                this.#counter_2.change_text_content(reseted_value[2]);
-                this.#counter_3.change_text_content(reseted_value[3]);
+                Object.keys(reseted_value).forEach((key)=>{
+                    this.#counters[key].change_text_content(reseted_value[key])
+                })
             }
         })
     }
@@ -192,16 +170,33 @@ class ReceiverComponent {
 
         this.create_interactive_components();
         let content_receiver = where_to_mount.querySelector('.receiver_block_content');
-        let en_dis_block = content_receiver.querySelector('.receiver_block_manage_en_dis')
-        this.#en_dis_receiver_btn.render(en_dis_block)
-        this.#is_enabled_receiver.render(en_dis_block)
+        let en_dis_block = content_receiver.querySelector('.block_manage_en_dis')
+        let start_stop_btn_block = en_dis_block.querySelector('.start_stop_btn_block');
+        let start_stop_indicator_block = en_dis_block.querySelector('.start_stop_indicator_block');
+        this.#en_dis_receiver_btn.render(start_stop_btn_block)
+        this.#is_enabled_receiver.render(start_stop_indicator_block)
 
-        let state_receiving_block =  content_receiver.querySelector('.receiver_block_state_receiving');
-        this.#counter_1.render(state_receiving_block);
-        this.#counter_2.render(state_receiving_block);
-        this.#counter_3.render(state_receiving_block);
-        this.#is_success_receiving.render(state_receiving_block)
-        this.#reset_counters_btn.render(state_receiving_block)
+        let counters_block =  content_receiver.querySelector('.counters_block');
+        Object.keys(this.#counters).forEach((counter_key)=>{
+
+            let counter_block = document.createElement('div');
+            counter_block.className = "counter_block";
+            counter_block.id= `${this.id}_counter${counter_key}`;
+
+            let counter_label = document.createElement('span');
+            counter_label.className = "counter_block_label";
+            counter_label.textContent = `#${counter_key} counter:`;
+            counter_block.appendChild(counter_label);
+            this.#counters[counter_key].render(counter_block);
+
+            counters_block.appendChild(counter_block);
+        })
+        this.#reset_counters_btn.render(counters_block);
+
+        let state_receiving_block =  content_receiver.querySelector('.state_receiving_block');
+        let receiving_indicator_block = state_receiving_block.querySelector('.receiving_indicator_block');
+        this.#is_success_receiving.render(receiving_indicator_block)
+
 
         this.#mounted = true;
     }

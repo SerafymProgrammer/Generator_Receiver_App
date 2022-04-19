@@ -1,19 +1,24 @@
 
 body {
     font-family: cursive;
+    color: #3806ad;
+
+    background: #9edbf5;
 }
 
 .generator_receiver_container {
     display: flex;
 
-    border: 1px solid #7116e0;
+    border-radius: 48px;
+    background: #9edbf5;
+    box-shadow:  10px 10px 20px #86bad0,
+    -10px -10px 20px #b6fcff;
 
     box-sizing: border-box;
 
     padding: 50px;
     margin: 25px;
 
-    background: rgba(171, 218, 224, 0.85);
 }
 
 .generator_block {
@@ -24,7 +29,49 @@ body {
 
     border: 1px solid #1699e0;
     margin: 10px;
+
+    padding: 0px 16px
 }
+
+.generator_block_content {
+    width: 100%;
+}
+
+.receiver_block_content {
+    width: 100%;
+}
+
+.block_manage_en_dis {
+    display: flex;
+    justify-content: space-around;
+
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid #1699e0;
+}
+
+.block_manage_en_dis {
+    display: flex;
+    justify-content: space-around;
+}
+.indicator_generator {
+    width: 50px;
+    height: 50px;
+    /*border: 1px solid #1638e0;*/
+    border-radius: 50%;
+
+    transition: background 0.4s ease-out;
+}
+
+.indicator_generator.enabled {
+    background: #3be016;
+}
+
+.indicator_generator.disabled {
+    background: #e01616;
+}
+
+
 
 .receiver_block {
     flex: 1;
@@ -34,27 +81,84 @@ body {
 
     border: 1px solid #1699e0;
     margin: 10px;
-
+    padding: 0px 16px
 }
 
-.indicator_generator {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #1638e0;
+.counters_block {
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid #1699e0;
 }
 
-.indicator_generator.enabled {
-        background: #3be016;
+.counter_block {
+    display: flex;
+    margin-top: 12px;
 }
 
-.indicator_generator.disabled {
-    background: #e01616;
+.counter_block_element {
+
+    margin-left: 12px;
 }
+.counter_block_element_text {
+    font-size: 18px;
+    font-family: cursive;
+    font-weight: 600;
+
+    color: #4432d3;
+}
+
+.counter_block_label {
+    font-size: 18px;
+    font-family: cursive;
+    font-weight: 600;
+
+    color: #4432d3;
+}
+
+.reset_counters_btn {
+    margin-top: 10px;
+    padding: 12px 16px;
+
+    border: none;
+
+    cursor: pointer;
+
+    border-radius: 16px;
+    background: #4e5a97;
+    /*box-shadow:*/
+    /*        10px 10px 25px 1px #5b4d64;*/
+    /*-10px -10px 20px #7b6988;*/
+
+    transition: all 0.4s;
+}
+
+.reset_counters_btn_text {
+    font-size: 18px;
+    font-family: cursive;
+    font-weight: 600;
+
+    color: white;
+}
+
+.reset_counters_btn:active {
+    /*border-radius: 32px;*/
+    background: #4e5a97;
+    box-shadow: inset 10px 10px 20px #4e5a97,
+    inset -10px -10px 20px #6a7acd;
+
+    transform: translate3d(-5px, 5px, 5px);
+}
+
+
 
 .indicator_receiver {
     width: 50px;
     height: 50px;
-    border: 1px solid #1638e0;
+    /*border: 1px solid #1638e0;*/
+    border-radius: 50%;
+
+
+    transition: background 0.4s ease-out;
 }
 
 .indicator_receiver.enabled {
@@ -65,10 +169,32 @@ body {
     background: #e01616;
 }
 
+.state_receiving_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0px;
+}
+
+
+.label_indicator_receiving {
+    font-size: 18px;
+    font-family: cursive;
+    font-weight: 600;
+
+    color: #4432d3;
+}
+
+
+
 .indicator_status_receiving {
     width: 50px;
     height: 50px;
-    border: 1px solid #1638e0;
+    /*border: 1px solid #1638e0;*/
+    border-radius: 50%;
+
+
+    transition: background 0.4s ease-out;
 }
 
 .indicator_status_receiving.success {
@@ -77,4 +203,50 @@ body {
 
 .indicator_status_receiving.error {
     background: #e01616;
+}
+
+.start_stop_btn_block {
+    flex: 1;
+}
+
+.start_stop_indicator_block {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.start_stop_btn {
+    padding: 12px 16px;
+
+    border: none;
+
+    /*background: #6a5591;*/
+    cursor: pointer;
+
+    border-radius: 16px;
+    background: linear-gradient(145deg, #8ec5dd, #a9eaff);
+    box-shadow:  10px 10px 20px #86bad0,
+    -10px -10px 20px #b6fcff;
+
+    transition: all 0.4s ease-out;
+
+
+}
+
+
+
+.start_stop_btn:active {
+    background: #9edbf5;
+    box-shadow: none;
+    transform: translate3d(-5px, 5px, 5px);
+}
+
+.start_stop_btn_text {
+    font-size: 18px;
+    font-family: cursive;
+    font-weight: 600;
+
+    color: #4432d3;
+
+    transition: all 0.4s ease-out;
 }

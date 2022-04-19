@@ -1,4 +1,4 @@
-import Queue from "../../queue/Queue.js";
+import Queue from "../../structures/queue/Queue.js";
 
 import generator_receiver_markup from "./generator_receiver.markup.js";
 import {create_unique_id} from "../../app.service.js";

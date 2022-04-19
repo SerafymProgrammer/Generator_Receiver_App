@@ -1,5 +1,5 @@
 import {validate_object_by_template_by_id} from "./receiver.service.js";
-import {validate_is_function} from "../app.service.js";
+import {validate_is_function} from "../../app.service.js";
 
 class Receiver {
 
@@ -68,7 +68,7 @@ class Receiver {
     }
 
     select_counter_id_by_received_object (received_object) {
-        let condition_data = Number(received_object.data);
+        let condition_data = received_object.data;
         if (condition_data<30) {
             return 1;
         }

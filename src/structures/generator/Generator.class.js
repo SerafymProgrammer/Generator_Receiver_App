@@ -1,4 +1,4 @@
-import {get_random_int} from '../app.service.js'
+import {get_random_int} from '../../app.service.js'
 import {get_object_by_template_by_id} from "./generator.service.js";
 
 class Generator {
@@ -37,7 +37,7 @@ class Generator {
         let new_obj = this.create_new_object();
         this.add_new_object_to_queue(new_obj);
         let random_delay = get_random_int(1, 11);
-        setTimeout(()=> {this.generate()}, random_delay*100)
+        setTimeout(()=> {this.generate()}, random_delay*1000)
     }
 
     start_generator() {

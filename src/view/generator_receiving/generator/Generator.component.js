@@ -1,4 +1,4 @@
-import Generator from "../../../generator/Generator.class.js";
+import Generator from "../../../structures/generator/Generator.class.js";
 import CustomBtn from "../../interface_components/start_stop_btn/custom_btn.js";
 import IndicatorComponent from "../../interface_components/indicator/indicator.js";
 import {create_unique_id} from "../../../app.service.js";
@@ -69,6 +69,7 @@ class GeneratorComponent {
             classes: {
                 block_indicator: 'indicator_generator',
             },
+            default_indicator_status:this.#generator.get_is_enabled_generator() ?  'enabled' : 'disabled'
         })
     }
 
@@ -106,9 +107,11 @@ class GeneratorComponent {
 
         this.create_interactive_components();
         let content_generator = where_to_mount.querySelector('.generator_block_content');
-        let en_dis_block = content_generator.querySelector('.generator_block_manage_en_dis');
-        this.#en_dis_generator_btn.render(en_dis_block);
-        this.#is_enabled_generator.render(en_dis_block);
+        let en_dis_block = content_generator.querySelector('.block_manage_en_dis');
+        let start_stop_btn_block = en_dis_block.querySelector('.start_stop_btn_block');
+        let start_stop_indicator_block = en_dis_block.querySelector('.start_stop_indicator_block');
+        this.#en_dis_generator_btn.render(start_stop_btn_block);
+        this.#is_enabled_generator.render(start_stop_indicator_block);
 
         this.#mounted = true;
     }

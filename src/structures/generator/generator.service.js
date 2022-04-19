@@ -1,4 +1,4 @@
-import DefaultTemplate from "../templates/DefaultTemplate.class.js";
+import DefaultTemplate from "../../templates/DefaultTemplate.class.js";
 
 export function get_object_by_template_by_id (id) {
     let args = [...arguments]
