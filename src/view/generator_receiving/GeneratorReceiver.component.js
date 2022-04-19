@@ -2,7 +2,7 @@ import Queue from "../../structures/queue/Queue.js";
 
 import generator_receiver_markup from "./generator_receiver.markup.js";
 import {create_unique_id} from "../../app.service.js";
-import {get_permission_on_render} from "../interface_components/components.service.js";
+import {get_permission_on_render} from "../components.service.js";
 import ReceiverComponent from "./receiver/Receiver.component.js";
 import GeneratorComponent from "./generator/Generator.component.js";
 
@@ -37,16 +37,20 @@ class GeneratorReceiverView {
         return this.#mounted;
     }
 
-
     render(where_to_mount) {
         let permission = get_permission_on_render(this.#mounted, where_to_mount, this.id);
         if (!permission){
             return
         }
-        let markup = generator_receiver_markup(this.id)
-        where_to_mount.innerHTML += markup;
+        let main_container = document.createElement('div');
+        main_container.id = `${this.id}_container`;
+        main_container.className = 'generator_receiver_container';
 
-        let content_ = where_to_mount.querySelector('.generator_receiver_container');
+        let markup = generator_receiver_markup()
+        main_container.innerHTML = markup;
+        where_to_mount.appendChild(main_container)
+
+        let content_ = document.getElementById(`${this.id}_container`);
         let content_generator = content_.querySelector('.generator_block');
         let content_receiver = content_.querySelector('.receiver_block');
         let Generator = new GeneratorComponent(this.id, this.#queue)
@@ -54,8 +58,7 @@ class GeneratorReceiverView {
         let Receiver = new ReceiverComponent(this.id, this.#queue)
         Receiver.render(content_receiver);
 
-        // Generator.toggle_start_stop_generator()
-        // setTimeout(()=>   Generator.toggle_start_stop_generator(), 12000)
+        this.#mounted = true;
     }
 }
 

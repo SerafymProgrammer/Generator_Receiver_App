@@ -1,8 +1,9 @@
 
 
 function receiver_markup() {
+    //html markup for receiver component
+
     let markup = `
- 
                     <h2 class="receiver_block_title">Receiver</h2>
                        <div class="receiver_block_content">
                           <div class="block_manage_en_dis">
@@ -17,7 +18,6 @@ function receiver_markup() {
                                     <div class="receiving_indicator_block"></div>
                               </div>                                            
                         </div>
-           
         `;
     return markup;
 }

@@ -1,0 +1,68 @@
+
+Start app:
+
+1.Clone code from git https://github.com/SerafymProgrammer/test_task_villmate.git
+2. Run file index.html
+3. Enjoy!
+
+
+App documentation:
+
+*Errors*
+
+Errors are handled at a basic level, in the App component using the "Try... catch" wrapper
+
+
+*Structure "closure_class":*
+
+One of the possible structures, it is implemented using a closure,
+which also makes it possible to reuse the component.
+
+function f(){
+ let x = ...
+ return {
+    get_x:
+        function f_(){
+             return x;
+        },
+         ...
+    }
+ }
+
+
+ *Queue:*
+
+ A queue is an ordered list of elements where an element is inserted
+ at the end of the queue and is removed from the front of the queue
+
+
+
+*Templates:*
+
+Templates for data objects are needed so that you can use different objects in the generator,
+each template has a validation function and others
+
+*View Components:*
+
+Components consist of a dynamic part in which
+there is a state of the components and other mutable data and structures,
+as well as the second component is html markup,
+which is mounted in the DOM in the component's function - render
+
+*Generator structure:*
+
+A generator class that receives a queue into which it will generate objects.
+It has an on/off state.
+When enabled, it starts generating objects (given by the template) into the queue,
+adding new elements to the end of the queue
+
+*Receiver structure:*
+
+The recipient class, its task is to retrieve objects from the queue and manage the data received from the object.
+For example, in this case there are 3 counters in which the "receiver" writes the number of objects according to the specified conditions.
+
+
+*Service*
+
+Contains auxiliary functions, with algorithms common to different objects,
+for example, they include validation, random number generation in a given range, etc.

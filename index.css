@@ -250,3 +250,19 @@ body {
 
     transition: all 0.4s ease-out;
 }
+
+
+.error_pub {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error_pub_text {
+    font-family: cursive;
+    color: #ce2525;
+
+    font-size: 45px;
+}

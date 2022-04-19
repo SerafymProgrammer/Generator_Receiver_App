@@ -2,7 +2,7 @@ import Receiver from "../../../structures/receiver/Receiver.class.js";
 import CustomBtn from "../../interface_components/start_stop_btn/custom_btn.js";
 import IndicatorComponent from "../../interface_components/indicator/indicator.js";
 import CounterComponent from "../../interface_components/counter/counter.js";
-import {get_permission_on_render} from "../../interface_components/components.service.js";
+import {get_permission_on_render} from "../../components.service.js";
 import {create_unique_id} from "../../../app.service.js";
 import receiver_markup from "./receiver.markup.js";
 
@@ -39,12 +39,14 @@ class ReceiverComponent {
         }
     }
 
-    //ошибка
+
     get id() {
+        //id getter
         return this._id;
     }
 
     set id(id) {
+        //id setter
         if (this.#mounted) {
             return false;
         }
@@ -56,6 +58,7 @@ class ReceiverComponent {
     }
 
     toggle_start_stop_receiver() {
+        // toggle on/of receiver
         if (!this.#mounted) {
             return
         }
@@ -73,6 +76,7 @@ class ReceiverComponent {
     }
 
     toggle_receiving_indicator(receiving_status) {
+        // toggle state receiving indicator
         if (!this.#mounted) {
             return
         }
@@ -87,12 +91,16 @@ class ReceiverComponent {
         }
         this.toggle_receiving_indicator(status);
         if (status&&this.#counters.hasOwnProperty(changed_state.key)) {
+
+            // change counter
             this.#counters[changed_state.key].change_text_content(changed_state.value);
         }
     }
 
 
     create_indicator_components(){
+        //creating indicators dom elements
+
         this.#is_enabled_receiver = IndicatorComponent({
             id: 'is_enabled_receiver',
             classes: {
@@ -108,6 +116,8 @@ class ReceiverComponent {
         })
     }
     create_counters_components(){
+        // creating counters dom elements
+
         let counters_values = this.#receiver.get_counters()
         Object.keys(this.#counters).forEach((key_)=>{
             this.#counters[key_] = CounterComponent({
@@ -121,6 +131,7 @@ class ReceiverComponent {
         })
     }
     create_buttons_components(){
+        // creating buttons dom elements
         this.#en_dis_receiver_btn =new CustomBtn({
             id: 'start_stop_receiver',
             classes: {
@@ -160,15 +171,21 @@ class ReceiverComponent {
     }
 
     render(where_to_mount) {
+        // rendering component in dom
+
+        // get permission on render
         let permission = get_permission_on_render(this.#mounted, where_to_mount, this.id);
         if (!permission){
             return
         }
 
+        // insert markup
         let markup = receiver_markup(this.id);
         where_to_mount.innerHTML += markup;
 
         this.create_interactive_components();
+
+        // render interactive components to parent as child
         let content_receiver = where_to_mount.querySelector('.receiver_block_content');
         let en_dis_block = content_receiver.querySelector('.block_manage_en_dis')
         let start_stop_btn_block = en_dis_block.querySelector('.start_stop_btn_block');

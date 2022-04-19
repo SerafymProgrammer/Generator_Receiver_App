@@ -2,7 +2,7 @@ import Generator from "../../../structures/generator/Generator.class.js";
 import CustomBtn from "../../interface_components/start_stop_btn/custom_btn.js";
 import IndicatorComponent from "../../interface_components/indicator/indicator.js";
 import {create_unique_id} from "../../../app.service.js";
-import {get_permission_on_render} from "../../interface_components/components.service.js";
+import {get_permission_on_render} from "../../components.service.js";
 import generator_markup from "./generator.markup.js";
 
 class GeneratorComponent {
@@ -28,12 +28,14 @@ class GeneratorComponent {
         this.#generator = new Generator(this.#queue);
     }
 
-    //ошибка
+
     get id() {
+        // id getter
         return this._id;
     }
 
     set id(id) {
+        // id setter
         if (this.#mounted) {
             return false;
         }
@@ -42,10 +44,12 @@ class GeneratorComponent {
     }
 
     get_mounted() {
+        // get is mounted in dom status
         return this.#mounted;
     }
 
     toggle_start_stop_generator() {
+        //toggle start stop generator
         if (!this.#mounted) {
             return
         }
@@ -64,6 +68,7 @@ class GeneratorComponent {
 
 
     create_indicator_components(){
+        //creating indicators dom elements
         this.#is_enabled_generator = IndicatorComponent({
             id: 'is_enabled_generator',
             classes: {
@@ -74,6 +79,7 @@ class GeneratorComponent {
     }
 
     create_buttons_components(){
+        // creating buttons dom elements
         this.#en_dis_generator_btn = new CustomBtn({
             id: 'start_stop_generator',
             classes: {
@@ -85,7 +91,6 @@ class GeneratorComponent {
                 this.toggle_start_stop_generator()
             }
         })
-        // this.#en_dis_generator_btn.add_event_listener('click',)
     }
 
 
@@ -96,16 +101,21 @@ class GeneratorComponent {
     }
 
     render(where_to_mount) {
+        // rendering component in dom
+
+        // get permission on render
         let permission = get_permission_on_render(this.#mounted, where_to_mount, this.id);
         if (!permission){
             return
         }
 
-        let markup = generator_markup(this.id);
+        let markup = generator_markup();
 
         where_to_mount.innerHTML += markup;
 
         this.create_interactive_components();
+
+        // render interactive components to parent as child
         let content_generator = where_to_mount.querySelector('.generator_block_content');
         let en_dis_block = content_generator.querySelector('.block_manage_en_dis');
         let start_stop_btn_block = en_dis_block.querySelector('.start_stop_btn_block');

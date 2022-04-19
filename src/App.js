@@ -12,17 +12,28 @@ class App {
         return this.#mounted_app;
     }
 
-    mount() {
-
-    }
-
     render() {
-        // console.log('Hey')
+
         let root_app = document.getElementById('root');
 
+        // *Errors*
+        try {
+            let generator_receiver_component = new GeneratorReceiverView('generator_receiver_1')
+            generator_receiver_component.render(root_app);
+        }
+         catch (e) {
+             console.log(e)
+             root_app.innerHTML = `<div class="error_pub">
+                                        <span class="error_pub_text">${e.message}</span>
+                                </div>`
+         }
 
-        let generator_receiver_component = new GeneratorReceiverView('generator_receiver_1')
-        generator_receiver_component.render(root_app);
+
+        //You can use the component as many times as you like.
+
+        // let generator_receiver_component_ = new GeneratorReceiverView('generator_receiver_2')
+        // generator_receiver_component_.render(root_app);
+        // ...
 
         this.#mounted_app = true;
     }

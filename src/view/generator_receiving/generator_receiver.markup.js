@@ -1,18 +1,15 @@
 
 
-function generator_receiver_markup(container_id) {
+function generator_receiver_markup() {
+    //html markup for generator_receiver component
+
     let markup = `
-            <div 
-            id="${container_id}_container"
-            class="generator_receiver_container">
                        <div class="generator_block">
                        
                        </div>
                      <div class="receiver_block">
                        
-                </div>
-            </div>
-            
+                    </div>
         `;
     return markup;
 }

@@ -1,6 +1,8 @@
 
 
 function generator_markup() {
+    //html markup for generator component
+
     let markup = `
                           <h2 class="generator_block_title">Generator</h2>
                           <div class="generator_block_content">              
